@@ -1,0 +1,11 @@
+{
+  "name": "organising-swiftly",
+  "version": "0.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "lodash": "^3.10.1",
+    "neo4j": "^1.1.1"
+  },
+  "private": true
+}
