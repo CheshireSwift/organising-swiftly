@@ -1,0 +1,11 @@
+digraph Schema {
+    node [shape=box];
+    Entry;
+
+    Entry -> Entry [label="is parent"];
+
+    node [shape=plaintext];
+    Entry -> Text;
+    Entry -> CompletionStatus;
+}
+
