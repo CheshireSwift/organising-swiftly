@@ -1,146 +1,28 @@
 FORMAT: 1A
-HOST: http://localhost:51313
 
-# Listening, Swiftly
-_Listening_ is a simple media server which can provide information about a media
-collection and optionally play music/video on attached devices.
+# Organising, Swiftly
+_Organising_ is an outliner/todo list with strong search functionality.
 
-<!--
-## Notes Collection [/notes]
-### List all Notes [GET]
+## Node Collection [/nodes]
+
+### Root node and all children [GET]
+Returns the root node, with all of its children.
+
 + Response 200 (application/json)
 
-        [{
-          "id": 1, "title": "Jogging in park"
-        }, {
-          "id": 2, "title": "Pick-up posters from post-office"
-        }]
-
-### Create a Note [POST]
-+ Request (application/json)
-
-        { "title": "Buy cheese and bread for breakfast." }
-
-+ Response 201 (application/json)
-
-        { "id": 3, "title": "Buy cheese and bread for breakfast." }
-
-## Note [/notes/{id}]
-A single Note object with all its details
-
-+ Parameters
-    + id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
-
-### Retrieve a Note [GET]
-+ Response 200 (application/json)
-
-    + Header
-
-            X-My-Header: The Value
-
-    + Body
-
-            { "id": 2, "title": "Pick-up posters from post-office" }
-
-### Remove a Note [DELETE]
-+ Response 204
--->
-
-# Group Songs
-**Songs** represent the fundamental unit of a _Listening_ collection. Songs are
-represented as JSON objects in the following format:
-
-        {
-            "s-id":     "kryptonite-381",
-            "title":    "Kryptonite",
-            "artist":   "3 Doors Down",
-            "album":    "The Better Life",
-            "length":   {"t": "3:56", "s": 236}
-        }
-
-Songs are used ubiquitously throughout the API, with many functions relating to
-them in some way. As such, most of those functions are listed in the context of
-the other objects they relate to.
-
-## Song Container Location [/containers/song-id]
-### List the details of a song's containers - i.e. album, artist [GET]
-+ Response 200 (application/json)
-
-        {
-            "song":
+    {
+        "ID": 0,
+        "text": "Update repo",
+        "completed": false,
+        "children": [
             {
-                "s-id":     "kryptonite-381",
-                "title":    "Kryptonite",
-                "artist":   "3 Doors Down",
-                "album":    "The Better Life",
-                "length":   {"t": "3:56", "s": 236}
-            },
-
-            "album":
-            {
-                "alb-id":   "the-better-life-894",
-                "title":    "The Better Life",
-                "artist":   "3 Doors Down",
-                "tracks":   11,
-                "length":   {"t": "40:44", "s": 2444}
-            },
-
-            "artist":
-            {
-                "todo": "write this"
-            }
-        }
-
-# Group Albums
-**Albums** are the most common grouping of songs, representing a CD or digital
-collection. They are represented in the following format:
-
-        {
-            "alb-id":   "the-better-life-894",
-            "title":    "The Better Life",
-            "artist":   "3 Doors Down",
-            "tracks":   11,
-            "length":   {"t": "40:44", "s": 2444}
-        }    
-
-## Albums [/albums/]
-### List all albums in the collection [GET]
-+ Response 200 (application/json)
-
-        [
-            {
-                "alb-id":   "the-better-life-894",
-                "title":    "The Better Life",
-                "artist":   "3 Doors Down",
-                "tracks":   11,
-                "length":   {"t": "40:44", "s": 2444}
-            },
-            {
-                "alb-id":   "other-albums-001",
-                "title":    "I'm Sure Other Albums Exist",
-                "artist":   "Other Artists Too",
-                "tracks":   0,
-                "length":   {"t": "0:00", "s": 0}
+                "ID": 1,
+                "text": "Commit changes",
+                "completed": true
+            }, {
+                "ID": 2,
+                "text": "Push to origin",
+                "completed": false
             }
         ]
-
-## Album Songs [/songs/album-id/]
-### List the songs on an album [GET]
-+ Response 200 (application/json)
-
-        [
-            {
-                "s-id":     "kryptonite-381",
-                "title":    "Kryptonite",
-                "artist":   "3 Doors Down",
-                "album":    "The Better Life",
-                "length":   {"t": "3:56", "s": 236}
-            },
-            {
-                "s-id":     "more-songs-001",
-                "title":    "Etc",
-                "artist":   "3 Doors Down",
-                "album":    "The Better Life",
-                "length":   {"t": "0:00", "s": 0}
-            }
-        ]
+    }
