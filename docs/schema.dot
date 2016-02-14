@@ -1,11 +1,22 @@
 digraph Schema {
     node [shape=box];
     Entry;
+    //User;
+    //Tag;
 
-    Entry -> Entry [label="is parent"];
+    Entry -> Entry [label="is parent(order)"];
+    //User -> Entry [label="is owner"];
+    //Entry -> Tag [label="is tagged with"];
 
     node [shape=plaintext];
     Entry -> Text;
     Entry -> CompletionStatus;
+
+    //User -> Username;
+    //User -> Salt;
+    //User -> Hash;
+
+    //Tag -> Name;
+    //Tag -> Colour;
 }
 
