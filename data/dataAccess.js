@@ -12,4 +12,3 @@ Promise.promisifyAll(db)
 exports.retrieveEntries = function() {
   return db.cypherAsync({ query: 'MATCH (root:Root)-[rels:CONTAINS*]-(entries) RETURN root, rels, entries' })
 }
-

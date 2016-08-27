@@ -3,11 +3,8 @@
 var express = require('express')
 var app = express()
 
-var dataTransform = require('./data/dataTransform')
+var apiRouter = require('./routes/api')
 
-app.get('/nodes', function(req, res) {
-  dataTransform.retrieveEntries().then(entries => res.json(entries))
-})
+app.use('/api', apiRouter)
 
 module.exports = app
-

@@ -9,7 +9,7 @@ function retrieveEntries() {
 }
 
 function transformEntries(rows) {
-  if (!rows) {
+  if (_.isEmpty(rows)) {
     return {}
   }
 
