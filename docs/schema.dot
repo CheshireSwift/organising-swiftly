@@ -1,16 +1,25 @@
-digraph Schema {
-    node [shape=box];
-    Entry;
+digraph DataModel {
+  rankdir=LR
+  subgraph cluster_schema {
+    label="Schema"
+    node [shape=record]
+
+    Root
+    Entry [label="Entry\nText\lCompletionStatus\l"]
+    Child
+
+    Root -> Child [label="ENTRIES"]
+    Entry -> Entry [label="PARENT"]
+    Entry -> Child [label="CHILDREN"]
+    Child -> Entry [label="VALUE"]
+    Child -> Child [label="NEXT"]
+
     //User;
     //Tag;
 
-    Entry -> Entry [label="is parent(order)"];
     //User -> Entry [label="is owner"];
     //Entry -> Tag [label="is tagged with"];
 
-    node [shape=plaintext];
-    Entry -> Text;
-    Entry -> CompletionStatus;
 
     //User -> Username;
     //User -> Salt;
@@ -18,5 +27,56 @@ digraph Schema {
 
     //Tag -> Name;
     //Tag -> Colour;
-}
+  }
 
+  subgraph cluster_example {
+    label="Example"
+    node [shape=rectangle]
+
+    r [label="Root"]
+    r -> rc1 [label="ENTRIES"]
+    rc1 -> rc2 [label="NEXT"]
+    rc1 -> laundry //[label="VALUE"]
+    rc2 -> gifts //[label="VALUE"]
+
+    laundry [label="Entry: Pick up laundry."]
+
+    laundry -> lc1 [label="CHILDREN"]
+    letc [label="...",shape=plaintext]
+
+    lc1 -> lc2 -> lc3 -> letc [label="NEXT"]
+
+    laundry1 [label="Entry: Leave house."]
+    laundry2 [label="Entry: Walk down street."]
+    laundry3 [label="Entry: ..."]
+
+    lc1 -> laundry1 //[label="VALUE"]
+    lc2 -> laundry2 //[label="VALUE"]
+    lc3 -> laundry3 //[label="VALUE"]
+
+    { rank=same; laundry1, laundry2, laundry3 }
+
+    gifts [label="Entry: Buy presents."]
+    
+    node [group="gifts"]
+    gifts -> gc1 [label="CHILDREN"]
+    gc1 -> gc2 [label="NEXT"]
+
+    node [group="giftValues"]
+    gifts1 [label="Entry: Archie"]
+    gifts2 [label="Entry: Betty"]
+
+    gc1 -> gifts1 //[label="VALUE"]
+    gc2 -> gifts2 //[label="VALUE"]
+
+    { rank=same; gifts1, gifts2 }
+
+    { rank=same; rc1, rc2 }
+    { rank=same; laundry, gifts, lc1, lc2, lc3, letc, gc1, gc2 }
+    
+    letc -> gifts [style=invis]
+
+    //{ laundry1:e, laundry2:e, laundry3:e } -> laundry:e [constraint=false]
+    //{ gifts1, gifts2 } -> gifts [constraint=false]
+  }
+}
