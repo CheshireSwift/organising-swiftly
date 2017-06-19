@@ -21,5 +21,3 @@ describe('the data transform', function() {
     expect(dataTransform.retrieveEntries()).to.eql(TEST_DATA.allEntries.formatted)
   })
 })
-
-

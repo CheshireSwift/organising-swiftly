@@ -32,7 +32,7 @@ var dataStub = {
 
 var app = proxyquire('../app', {'../data/dataTransform': dataStub})
 
-xdescribe('the app', function() {
+describe('the app', function() {
   it('returns the root node, with all of its children', function(done) {
     request(app)
       .get('/api/nodes')
@@ -43,4 +43,3 @@ xdescribe('the app', function() {
       })
   })
 })
-

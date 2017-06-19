@@ -3,8 +3,6 @@
 var express = require('express')
 var app = express()
 
-var apiRouter = require('./routes/api')
-
-app.use('/api', apiRouter)
+app.use('/api', require('./routes/api'))
 
 module.exports = app
