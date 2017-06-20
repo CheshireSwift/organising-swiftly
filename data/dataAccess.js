@@ -1,9 +1,9 @@
 'use strict'
 
 var neo4j = require('neo4j-driver').v1
-const DB_HOST = process.env.NEO4J_URL
+const DB_HOST = process.env.NEO4J_HOST
 const DB_USER = process.env.NEO4J_USER
-const DB_PASS = process.env.NEO4J_PW
+const DB_PASS = process.env.NEO4J_PASS
 var driver = neo4j.driver(`bolt://${DB_HOST}`, neo4j.auth.basic(DB_USER || 'neo4j', DB_PASS))
 var session = driver.session()
 

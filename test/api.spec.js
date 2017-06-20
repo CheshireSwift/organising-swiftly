@@ -1,6 +1,6 @@
 var expect = require('chai').expect,
     request = require('supertest'),
-    proxyquire = require('proxyquire');
+    proxyquire = require('proxyquire')
 
 const TEST_NODES_DATA = [{
   "ID": 0,
@@ -32,7 +32,7 @@ var dataStub = {
 
 var app = proxyquire('../app', {'../data/dataTransform': dataStub})
 
-describe('the app', function() {
+describe('the API', function() {
   it('returns the root node, with all of its children', function(done) {
     request(app)
       .get('/api/nodes')
